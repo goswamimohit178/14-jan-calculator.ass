@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>🧮 Calculator 🧮 </title>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <link rel="stylesheet" href="assignment_1_calculator.css">
+   </head>
+   <style>
+       body {
+   margin: auto;
+   background-image: url("https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg");
+   background-size: cover;
+}
+.body {
+   margin: auto;
+   width: 150px;
+   border: 5px solid #e3edf1;
+   background-color: #ffffff;
+   border-radius: 10px;
+   margin-top: 100px;
+   margin-bottom: 100px;
+   padding: 5px;
+}
+#output {
+   width: 140px;
+   height: 20px;
+   margin-left: 5px;
+   background-color: white;
+   border-radius: 10px;
+   text-align: right;
+   margin-top: 20px;
+   margin-bottom: 1px;
+   padding-top: 10px;
+   overflow: hidden;
+}
+tr button {
+   width: 30px;
+   height: 30px;
+   margin-left: 2px;
+   border: transparent;
+   border-radius: 5px; 
+   background-color: #ffffff;  
+}
+
+.clearAll {
+   color: #0aa8ad;
+}
+.slice {
+   color: #0aa8ad;
+}
+.perce {
+   color: #0aa8ad;
+}
+.divide {
+   color: #0aa8ad;
+}
+.mul {
+   color: #0aa8ad;
+}
+.sub {
+   color: #0aa8ad;
+}
+.add {
+   color: #0aa8ad;
+}
+.equals {
+   color: #0aa8ad;
+}
+   </style>
+   <script>
+       console.log('☀');
+
+
+var number1 = "";
+var number2 = "";
+var operator = "";
+
+
+function concatNumber(single_digit) {
+    if(operator == "") {
+        number1 = number1 + single_digit;
+        display(number1);
+    } else {
+        number2 = number2 + single_digit;
+        display(number2);
+    }
+   
+}
+
+function setOperator(new_operator) {
+   operator = new_operator;
+}
+
+function clearAll() {
+   if(operator == "") {
+       number1 = "";
+       display(number1);
+   } else {
+       number2 = "";
+       display(number2);
+   }
+   
+}
+
+function deleteLastDigit() {
+    if(operator == "") {
+        number1 = number1.slice(0, -1);
+        display(number1);
+    } else {
+        number2 = number2.slice(0, -1);
+        display(number2);
+    }
+    
+}
+
+function perce(num1, num2) {
+   num1 = parseFloat(num1);
+   num2 = parseFloat(num2);
+    var perce = num1 * (num2 / 100);
+    return perce;
+}
+
+function divide(num1, num2) {
+   return num1 / num2;
+}
+
+function mul(num1, num2) {
+   return num1 * num2;
+}
+
+function sub(num1, num2) {
+   return num1 - num2;
+}
+
+function add(num1, num2) {
+   num1 = parseFloat(num1);
+   num2 = parseFloat(num2);
+   var sum = num1 + num2; 
+   return sum;
+}
+
+function equals() {
+    if(operator == "*") {
+      number1 = mul(number1, number2);
+      number2 = "";
+      operator = "";
+      display(number1);
+    }
+    else if(operator == "%") {
+      number1 = perce(number1, number2);
+      number2 = "";
+      operator = "";
+      display(number1.toFixed(2));
+    }
+    else if(operator == "/") {
+      number1 = divide(number1, number2);
+      number2 = "";
+      operator = "";
+      display(number1.toFixed(2));
+    }
+    else if(operator == "-") {
+      number1 = sub(number1, number2);
+      number2 = "";
+      operator = "";
+      display(number1);
+    }
+    else if(operator == "+") {
+      number1 = add(number1, number2);
+      number2 = "";
+      operator = "";
+      display(number1);
+  }
+}
+
+
+function display(num) {
+    var para = document.getElementById('output');
+    para.innerText = num;
+}
+   </script>
+   
+
+   <body>
+      <div class="body">
+         <p id="output">0</p><br/>
+         <table id="table">
+            <tr>
+               <td><button  class="clearAll" onClick="clearAll();">C</button></td>
+               <td ><button class="slice" onClick="deleteLastDigit();">⌫</button></td>
+               <td><button class="perce" onClick='setOperator("%");'>%</button></td>
+               <td><button class="divide" onClick='setOperator("/");'>÷</button></td>
+            </tr>
+            <tr>
+               <td><button onClick='concatNumber("7");'>7</button></td>
+               <td><button onClick='concatNumber("8");'>8</button></td>
+               <td><button onClick='concatNumber("9");'>9</button></td>
+               <td><button class="mul" onClick='setOperator("*");'>×</button></td>
+            </tr>
+            <tr>
+               <td><button onClick='concatNumber("4");'>4</button></td>
+               <td><button onClick='concatNumber("5");'>5</button></td>
+               <td><button onClick='concatNumber("6");'>6</button></td>
+               <td><button class="sub" onClick='setOperator("-");'>-</button></td>
+            </tr>
+            <tr>
+               <td><button onClick='concatNumber("1");'>1</button></td>
+               <td><button onClick='concatNumber("2");'>2</button></td>
+               <td><button onClick='concatNumber("3");'>3</button></td>
+               <td><button   class="add" onClick='setOperator("+");'>+</button></td>
+            </tr>
+            <tr>
+               <td><button onClick='concatNumber("00");'>00</button></td>
+               <td><button onClick='concatNumber("0");'>0</button></td>
+               <td><button onClick='concatNumber(".");'>.</button></td>
+               <td><button  class="equals" onClick="equals();">=</button></td>
+            </tr>
+         </table>
+      </div>
+      <script src="assignment_1_calculator.js"></script>
+   </body>
+</html>
